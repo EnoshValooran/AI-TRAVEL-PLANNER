@@ -40,3 +40,10 @@ $env:GEMINI_MODEL="gemini-3.1-flash-lite"
 ## Notes
 
 This app uses Node 18+ built-in `fetch`, so there are no npm dependencies to install.
+
+## Deployment
+
+Do not deploy this as GitHub Pages only. GitHub Pages is static hosting and cannot run
+`server.js`, so `/api/plan` will return a non-JSON 404 page. Host the Node backend on a
+service such as Render, Railway, Fly.io, Vercel serverless functions, or another Node
+host, then set `GEMINI_API_KEY` in that host's environment variables.

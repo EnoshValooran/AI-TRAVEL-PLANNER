@@ -86,6 +86,20 @@ function tripPayload(formData) {
   };
 }
 
+async function readApiResponse(response) {
+  const contentType = response.headers.get("content-type") || "";
+
+  if (contentType.includes("application/json")) {
+    return response.json();
+  }
+
+  const text = await response.text();
+  const preview = text.replace(/\s+/g, " ").trim().slice(0, 120);
+  throw new Error(
+    `The backend did not return JSON. Make sure the Node server is running and the site is not hosted as static-only GitHub Pages.${preview ? ` Response: ${preview}` : ""}`,
+  );
+}
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   submitButton.disabled = true;
@@ -98,7 +112,7 @@ form.addEventListener("submit", async (event) => {
       body: JSON.stringify(tripPayload(new FormData(form))),
     });
 
-    const data = await response.json();
+    const data = await readApiResponse(response);
     if (!response.ok) throw new Error(data.error || "Could not generate the plan.");
 
     renderPlan(data.plan);
