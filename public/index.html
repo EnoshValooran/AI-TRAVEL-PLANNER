@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Travel Planner</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="planner">
+        <div class="intro">
+          <p class="eyebrow">Gemini Flash-Lite planner</p>
+          <h1>AI Travel Planner</h1>
+          <p>Build a practical day-by-day itinerary with interests, budget, pace, food ideas, and safety notes.</p>
+        </div>
+
+        <form id="trip-form" class="trip-form">
+          <label>
+            Destination
+            <input name="destination" placeholder="Tokyo, Japan" required maxlength="80" />
+          </label>
+
+          <div class="grid-two">
+            <label>
+              Start date
+              <input name="startDate" type="date" />
+            </label>
+            <label>
+              Days
+              <input name="days" type="number" min="1" max="14" value="4" required />
+            </label>
+          </div>
+
+          <div class="grid-two">
+            <label>
+              Travelers
+              <input name="travelers" type="number" min="1" max="12" value="2" required />
+            </label>
+            <label>
+              Budget
+              <select name="budget">
+                <option>Budget-friendly</option>
+                <option selected>Mid-range</option>
+                <option>Comfort</option>
+                <option>Luxury</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Pace
+            <select name="pace">
+              <option>Relaxed</option>
+              <option selected>Balanced</option>
+              <option>Packed</option>
+            </select>
+          </label>
+
+          <fieldset>
+            <legend>Interests</legend>
+            <div class="chips">
+              <label><input type="checkbox" name="interests" value="Food" checked /> Food</label>
+              <label><input type="checkbox" name="interests" value="Culture" checked /> Culture</label>
+              <label><input type="checkbox" name="interests" value="Nature" /> Nature</label>
+              <label><input type="checkbox" name="interests" value="Museums" /> Museums</label>
+              <label><input type="checkbox" name="interests" value="Shopping" /> Shopping</label>
+              <label><input type="checkbox" name="interests" value="Nightlife" /> Nightlife</label>
+            </div>
+          </fieldset>
+
+          <label>
+            Extra notes
+            <textarea name="notes" rows="4" maxlength="500" placeholder="Vegetarian food, easy public transit, first-time visitors..."></textarea>
+          </label>
+
+          <button type="submit" id="submit-btn">Generate itinerary</button>
+          <p class="form-note">Your API key is used only on the server. The browser sends trip preferences, not secrets.</p>
+        </form>
+      </section>
+
+      <section class="results" aria-live="polite">
+        <div id="empty-state" class="empty-state">
+          <h2>Your itinerary will appear here</h2>
+          <p>Fill the form and generate a plan. Live prices, closures, transport changes, and entry rules should still be verified before booking.</p>
+        </div>
+        <div id="loading" class="loading hidden">Planning your trip...</div>
+        <div id="error" class="error hidden"></div>
+        <article id="plan" class="plan hidden"></article>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

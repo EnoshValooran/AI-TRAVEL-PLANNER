@@ -1,0 +1,14 @@
+{
+  "name": "ai-travel-planner-gemini",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A simple AI travel planner with a safe Node backend proxy for the Gemini API.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
